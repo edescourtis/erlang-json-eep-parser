@@ -73,10 +73,15 @@ json_encode(S) when is_binary(S); is_atom(S) ->
     json_encode_string(S);
 json_encode(Array) when is_list(Array) ->
     json_encode_array(Array);
+json_encode(Map) when is_map(Map) ->
+    json_encode_map(Map);
 json_encode({Props}) when is_list(Props) ->
     json_encode_proplist(Props);
 json_encode(Bad) ->
     exit({json_encode, {bad_term, Bad}}).
+
+json_encode_map(Map) ->
+    json_encode_proplist(maps:to_list(Map)).
 
 json_encode_array([]) ->
     <<"[]">>;

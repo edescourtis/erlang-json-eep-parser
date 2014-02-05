@@ -4,8 +4,8 @@ Terminals '{' '}' '[' ']' string ',' ':' integer float true false null.
 
 Rootsymbol element.
 
-object -> '{' members '}' : {'$2'}.
-object -> '{' '}' : {[]}.
+object -> '{' members '}' : maps:from_list('$2').
+object -> '{' '}' : maps:from_list([]).
 
 members -> member ',' members : ['$1' | '$3'].
 members -> member : ['$1'].
